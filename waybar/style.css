@@ -1,0 +1,206 @@
+@import "./colors.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-size: 16px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+window#waybar {
+  background: alpha(@background, 0.85); /* slightly more transparent */
+}
+
+/* ---------------- MODULE BASE ---------------- */
+
+#custom-cachy,
+#cpu,
+#clock,
+#mpris,
+#custom-menu,
+#tray,
+#privacy,
+#network,
+#bluetooth,
+#pulseaudio,
+#pulseaudio.microphone,
+#backlight,
+#battery,
+#custom-powermenu {
+  color: @on_background;
+  padding: 6px 6px; /* gives icons breathing room */
+  transition: 0.15s ease;
+}
+
+/* Hover opacity */
+
+#custom-cachy:hover,
+#cpu:hover,
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#pulseaudio.microphone:hover,
+#pulseaudio.sink-muted:hover,
+#custom-powermenu:hover {
+  opacity: 0.65;
+}
+
+/* ---------------- WORKSPACES ---------------- */
+
+#workspaces {
+  margin: 0 4px;
+}
+
+/* inactive */
+
+#workspaces button {
+  background-color: alpha(@secondary, 0.06);
+  border-radius: 8px;
+  padding: 0 6px;
+  margin: 3px 0;
+  border: none;
+  opacity: 0.75;
+  transition: 0.15s ease;
+}
+
+/* hover */
+
+#workspaces button:hover {
+  background-color: alpha(@secondary, 0.15);
+  opacity: 0.9;
+}
+
+/* active */
+
+#workspaces button.active {
+  background-color: alpha(@secondary, 0.35);
+  opacity: 1;
+}
+
+/* ---------------- PRIVACY ---------------- */
+
+#privacy {
+  margin: 4px;
+  color: @tertiary;
+}
+
+/* ---------------- CLOCK ---------------- */
+
+#clock {
+  color: @primary;
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 18px;
+}
+
+/* ---------------- MUSIC ---------------- */
+
+#mpris {
+  color: @secondary;
+}
+
+/* ---------------- NETWORK ---------------- */
+
+#network.disabled {
+  color: @error;
+}
+
+#network.wifi {
+  color: @primary;
+}
+
+#network.ethernet {
+  color: @secondary;
+}
+
+/* ---------------- BLUETOOTH ---------------- */
+
+#bluetooth.disabled {
+  color: @error;
+}
+
+#bluetooth.connected {
+  color: @primary;
+}
+
+/* ---------------- AUDIO ---------------- */
+
+#pulseaudio.sink-muted:not(.microphone) {
+  color: @secondary;
+}
+
+#pulseaudio.microphone.source-muted {
+  color: @error;
+}
+
+/* ---------------- BATTERY ---------------- */
+
+#battery.plugged {
+  color: @primary;
+}
+
+#battery.charging {
+  color: @secondary;
+}
+
+#battery.critical {
+  color: @error;
+}
+
+/* ---------------- TOOLTIP ---------------- */
+
+tooltip {
+  background: alpha(@background, 0.95);
+  border: 1px solid alpha(@on_background, 0.2);
+}
+
+tooltip * {
+  color: @on_background;
+  margin: 2px;
+  background: transparent;
+}
+
+/* ---------------- SLIDERS ---------------- */
+
+#pulseaudio-slider,
+#backlight-slider {
+  min-height: 80px;
+}
+
+#pulseaudio-slider slider,
+#backlight-slider slider {
+  background: transparent;
+}
+
+#pulseaudio-slider trough,
+#backlight-slider trough {
+  min-width: 8px;
+}
+
+#pulseaudio-slider highlight {
+  background: @primary;
+}
+
+#backlight-slider highlight {
+  background: @secondary;
+}
+
+/* ---------------- CUSTOM ICONS ---------------- */
+
+#custom-fedora {
+  font-size: 18px;
+  padding: 0 10px;
+  color: @primary;
+  transition: 0.2s ease;
+}
+
+#custom-fedora:hover {
+  opacity: 0.7;
+}
+
+/* separator */
+
+#custom-separator {
+  color: alpha(@secondary, 0.5);
+  font-size: 12px;
+  padding: 0 4px;
+}
