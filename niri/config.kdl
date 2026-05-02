@@ -104,7 +104,7 @@ output "DP-2" {
 // https://yalter.github.io/niri/Configuration:-Layout
 
 layout {
-    gaps 16
+    gaps 10
     center-focused-column "never"
     default-column-width { proportion 0.5; }
 
@@ -629,4 +629,44 @@ layer-rule {
 
 
 include "./noctalia.kdl"
+
+
+// Enable blur behind the Alacritty terminal.
+window-rule {
+    match app-id="^kitty$"
+
+    background-effect {
+        blur true
+    }
+}
+
+// Enable blur behind the fuzzel launcher.
+layer-rule {
+    match namespace="^launcher$"
+
+    background-effect {
+        blur true
+    }
+}
+
+// Blur the background behind pop-up menus in Loupe.
+window-rule {
+    match app-id="Loupe"
+
+    popups {
+        // Matches the default libadwaita pop-up corner radius.
+        geometry-corner-radius 15
+
+        // Note: it'll look better to set background opacity
+        // through your GTK theme CSS and not here.
+        // This is just an example that makes it look obvious.
+        opacity 0.5
+
+        background-effect {
+            blur true
+        }
+    }
+}
+
+
 
