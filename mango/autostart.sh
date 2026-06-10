@@ -4,17 +4,25 @@
 set +e
 
 # some env can't auto run the portal, so need this
-/usr/lib/xdg-desktop-portal-wlr  >/dev/null 2>&1 &
+/usr/libexec/xdg-desktop-portal-gtk &
+/usr/libexec/xdg-desktop-portal-wlr &
+sleep 1
+/usr/libexec/xdg-desktop-portal &
 
+
+
+# Set GTK dark mode preference (for modern GTK4/libadwaita apps)
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # notify
-dunst >/dev/null 2>&1 &
+swaync >/dev/null 2>&1 &
 
 # wallpaper
-swaybg -i ~/.config/mango/wallpaper/wallpaper.png >/dev/null 2>&1 &
+#swaybg -i ~/Pictures/wallpapers/manga.png >/dev/null 2>&1 &
+waypaper --restore >/dev/null 2>&1 &
 
 # top bar
-waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
+waybar -c /home/swavlabs/.config/waybar/config.jsonc -s /home/swavlabs/.config/waybar/style.css >/dev/null 2>&1 &
 
 # xwayland dpi scale
 echo "Xft.dpi: 140" | xrdb -merge #dpi缩放

@@ -1,20 +1,98 @@
 {
-  "reload_style_on_change": true,
-  "toggle": true,
   "layer": "top",
-  "position": "left",
-  "margin-top": 0,
-  "margin-bottom": 0,
-  "margin-left": 0,
-  "margin-right": 0,
-  "spacing": 0,
-  "include": ["~/.config/waybar/modules.json"],
-  "modules-left": ["custom/fedora","custom/separator", "clock"],
-  "modules-center": ["mpris", "niri/workspaces"],
+  "position": "top",
+  "exclusive": true,
+  "height": 36,
+
+  "modules-left": [
+    "ext/workspaces",
+    "wlr/taskbar",
+    "dwl/window"
+  ],
+
+  "modules-center": [
+    "mpris"
+  ],
+
   "modules-right": [
     "tray",
-    "group/audio",
-    "group/brightness",
-    "battery"
-  ]
+    "network",
+    "pulseaudio",
+    "custom/updates",
+    "clock",
+    "custom/notification",
+    "custom/power"
+  ],
+
+  "ext/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "default": ""
+    }
+  },
+
+  "dwl/window": {
+  "format": "{}",
+  "max-length": 60
+},
+
+  "mpris": {
+    "format": "♪ {title:.35}",
+    "format-paused": "⏸ {title:.35}",
+    "on-click": "playerctl play-pause"
+  },
+
+  "custom/notification": {
+  "format": "{icon}",
+  "exec": "swaync-client -swb",
+  "interval": 1,
+  "return-type": "json",
+  "on-click": "swaync-client -t -sw",
+  "on-click-right": "swaync-client -d -sw"
+},
+
+  "custom/updates": {
+    "format": "󰚰 {}",
+    "interval": 300,
+    "exec": "checkupdates 2>/dev/null | wc -l",
+    "on-click": "kitty -e yay -Syu"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": ["", "", ""],
+    "on-click": "pamixer -t"
+  },
+
+  "network": {
+    "format-wifi": "{essid} {signalStrength}% ",
+    "format-ethernet": "󰈀 NET",
+    "format-disconnected": "Disconnected"
+  },
+
+  "tray": {
+    "icon-size": 18,
+    "spacing": 8
+  },
+
+  "clock": {
+    "format": "{:%I:%M %p} ",
+    "format-alt": "{:%A %B %d}"
+  },
+
+  "custom/power": {
+    "format": "",
+    "on-click": "wlogout -b 6 --protocol layer-shell"
+  }
 }

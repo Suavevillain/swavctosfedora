@@ -1,206 +1,161 @@
-@import "./colors.css";
+@import url("/home/swavlabs/.config/waybar/colors.css");
+
+/* =========================
+   GLOBAL
+   ========================= */
 
 * {
-  font-family: "JetBrainsMono Nerd Font Propo";
-  font-size: 16px;
-  border-radius: 0;
-  box-shadow: none;
+  border: none;
+  font-family: FiraCode Nerd Font;
+  font-weight: 700;
+  font-size: 14px;
+  min-height: 0;
 }
+
+/* =========================
+   BAR BASE
+   ========================= */
 
 window#waybar {
-  background: alpha(@background, 0.85); /* slightly more transparent */
+  background: transparent;
 }
 
-/* ---------------- MODULE BASE ---------------- */
+#waybar {
+  margin: 6px 8px;
+}
 
-#custom-cachy,
-#cpu,
-#clock,
+/* =========================
+   UNIFIED MODULE STYLE
+   ========================= */
+
+#workspaces,
+#tags,
+#window,
+#taskbar,
 #mpris,
-#custom-menu,
 #tray,
-#privacy,
 #network,
-#bluetooth,
 #pulseaudio,
-#pulseaudio.microphone,
-#backlight,
-#battery,
-#custom-powermenu {
-  color: @on_background;
-  padding: 6px 6px; /* gives icons breathing room */
-  transition: 0.15s ease;
+#custom-updates,
+#clock,
+#custom-notification,
+#custom-power {
+  background: alpha(@surface, 0.80);
+  color: @foreground;
+
+  border: 2px solid alpha(@primary, 0.55);
+
+  padding: 4px 10px;
+  margin: 4px 4px;
+
+  border-radius: 0px;
 }
 
-/* Hover opacity */
+/* =========================
+   UNIFIED MODULE STYLE
+   ========================= */
 
-#custom-cachy:hover,
-#cpu:hover,
-#network:hover,
-#bluetooth:hover,
-#pulseaudio:hover,
-#pulseaudio.microphone:hover,
-#pulseaudio.sink-muted:hover,
-#custom-powermenu:hover {
-  opacity: 0.65;
+#window,
+#mpris,
+#tray,
+#network,
+#pulseaudio,
+#custom-updates,
+#clock,
+#custom-notification,
+#custom-power {
+  background: alpha(@surface, 0.80);
+  color: @foreground;
+
+  border: 2px solid alpha(@primary, 0.55);
+
+  padding: 4px 10px;
+  margin: 4px 4px;
+
+  border-radius: 0px;
 }
 
-/* ---------------- WORKSPACES ---------------- */
+/* =========================
+   LEFT CLUSTER
+   WORKSPACES + TASKBAR
+   ========================= */
 
 #workspaces {
-  margin: 0 4px;
+  background: alpha(@surface, 0.80);
+  color: @foreground;
+
+  border: 2px solid alpha(@primary, 0.55);
+  border-right: 0;
+
+  padding: 4px 6px;
+
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  margin-right: 0px;
+
+  border-radius: 0;
 }
 
-/* inactive */
+#taskbar {
+  background: alpha(@surface, 0.80);
+  color: @foreground;
 
-#workspaces button {
-  background-color: alpha(@secondary, 0.06);
-  border-radius: 8px;
-  padding: 0 6px;
-  margin: 3px 0;
-  border: none;
-  opacity: 0.75;
-  transition: 0.15s ease;
+  border: 2px solid alpha(@primary, 0.55);
+  border-left: 0;
+
+  padding: 4px 10px;
+
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 0px;
+  margin-right: 4px;
+
+  border-radius: 0;
 }
-
-/* hover */
-
-#workspaces button:hover {
-  background-color: alpha(@secondary, 0.15);
-  opacity: 0.9;
-}
-
-/* active */
-
-#workspaces button.active {
-  background-color: alpha(@secondary, 0.35);
-  opacity: 1;
-}
-
-/* ---------------- PRIVACY ---------------- */
-
-#privacy {
-  margin: 4px;
-  color: @tertiary;
-}
-
-/* ---------------- CLOCK ---------------- */
-
-#clock {
-  color: @primary;
-  font-family: "FiraCode Nerd Font", monospace;
-  font-size: 18px;
-}
-
-/* ---------------- MUSIC ---------------- */
+/* =========================
+   MPRIS
+   ========================= */
 
 #mpris {
-  color: @secondary;
+  opacity: 0.95;
 }
 
-/* ---------------- NETWORK ---------------- */
+/* =========================
+   RIGHT SIDE CLUSTER
+   ========================= */
 
-#network.disabled {
-  color: @error;
+#clock,
+#custom-notification,
+#custom-power {
+  margin: 4px 0px;
+  padding: 4px 10px;
 }
 
-#network.wifi {
-  color: @primary;
+/* notification cleanup */
+#custom-notification {
+  border-left: 0px;
+  border-right: 0px;
 }
 
-#network.ethernet {
-  color: @secondary;
+/* tray spacing */
+#tray {
+  padding: 4px 8px;
 }
 
-/* ---------------- BLUETOOTH ---------------- */
+/* =========================
+   HOVER (UNIFIED)
+   ========================= */
 
-#bluetooth.disabled {
-  color: @error;
-}
-
-#bluetooth.connected {
-  color: @primary;
-}
-
-/* ---------------- AUDIO ---------------- */
-
-#pulseaudio.sink-muted:not(.microphone) {
-  color: @secondary;
-}
-
-#pulseaudio.microphone.source-muted {
-  color: @error;
-}
-
-/* ---------------- BATTERY ---------------- */
-
-#battery.plugged {
-  color: @primary;
-}
-
-#battery.charging {
-  color: @secondary;
-}
-
-#battery.critical {
-  color: @error;
-}
-
-/* ---------------- TOOLTIP ---------------- */
-
-tooltip {
-  background: alpha(@background, 0.95);
-  border: 1px solid alpha(@on_background, 0.2);
-}
-
-tooltip * {
-  color: @on_background;
-  margin: 2px;
-  background: transparent;
-}
-
-/* ---------------- SLIDERS ---------------- */
-
-#pulseaudio-slider,
-#backlight-slider {
-  min-height: 80px;
-}
-
-#pulseaudio-slider slider,
-#backlight-slider slider {
-  background: transparent;
-}
-
-#pulseaudio-slider trough,
-#backlight-slider trough {
-  min-width: 8px;
-}
-
-#pulseaudio-slider highlight {
-  background: @primary;
-}
-
-#backlight-slider highlight {
-  background: @secondary;
-}
-
-/* ---------------- CUSTOM ICONS ---------------- */
-
-#custom-fedora {
-  font-size: 18px;
-  padding: 0 10px;
-  color: @primary;
-  transition: 0.2s ease;
-}
-
-#custom-fedora:hover {
-  opacity: 0.7;
-}
-
-/* separator */
-
-#custom-separator {
-  color: alpha(@secondary, 0.5);
-  font-size: 12px;
-  padding: 0 4px;
+#workspaces:hover,
+#tags:hover,
+#window:hover,
+#mpris:hover,
+#tray:hover,
+#network:hover,
+#pulseaudio:hover,
+#clock:hover,
+#custom-notification:hover,
+#custom-power:hover {
+  background: alpha(@primary, 0.22);
 }
