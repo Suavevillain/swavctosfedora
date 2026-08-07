@@ -129,13 +129,13 @@ prefer-no-csd
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "waybar"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "noctalia"
 spawn-at-startup "/usr/libexec/polkit-mate-authentication-agent-1"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "swww" "restore"
+//spawn-at-startup "swww-daemon"
+//spawn-at-startup "swww" "restore"
 spawn-at-startup "kdeconnectd"
 spawn-at-startup "kdeconnect-indicator"
-//spawn-at-startup "swaync"
+spawn-at-startup "swaync"
 
 //screenshare support etc.
 spawn-sh-at-startup "xdg-desktop-portal-gtk"
@@ -296,7 +296,7 @@ window-rule {
 
 window-rule {
     match app-id="com.github.th_ch.youtube_music"
-    open-on-output "HDMI-A-2"
+    open-on-output "DP-2"
 }
 
 
@@ -304,7 +304,18 @@ window-rule {
 
 window-rule {
     match app-id="kitty"
-    opacity 0.95
+    // default-column-width { proportion 0.5; }
+    opacity 0.75
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
 }
 
 window-rule {
@@ -337,11 +348,6 @@ window-rule {
     clip-to-geometry true
 }
 
-// Set the overview wallpaper on the backdrop.
-layer-rule {
-  match namespace="^noctalia-overview*"
-  place-within-backdrop true
-}
 
 debug {
     honor-xdg-activation-with-invalid-serial
@@ -370,9 +376,8 @@ binds {
     Mod+N hotkey-overlay-title="File Manager" { spawn "nautilus"; }
     Alt+E hotkey-overlay-title="Emoji" { spawn "flatpak" "run" "com.tomjwatson.Emote"; }
     Alt+T hotkey-overlay-title="Tauon Music Box" { spawn "flatpak" "run" "com.github.taiko2k.tauonmb"; }
-    //Alt+N allow-when-locked=true hotkey-overlay-title=null { spawn-sh "swaync-client -t -sw || exec swaync-client"; }
+    Alt+N allow-when-locked=true hotkey-overlay-title=null { spawn-sh "swaync-client -t -sw || exec swaync-client"; }
     Alt+V hotkey-overlay-title="Vesktop" { spawn "vesktop"; }
-    Ctrl+L { spawn "qs" "ipc" "call" "plugin:niri-vertical-monitor" "toggle"; }
 Alt+S { spawn "~/.local/bin/miri" "action" "set-focused-workspace-mode" "scroll"; }
 Alt+M { spawn "~/.local/bin/miri" "action" "set-focused-workspace-mode" "master"; }
 Alt+C { spawn "~/.local/bin/miri" "action" "cycle-focused-workspace-mode"; }
@@ -384,9 +389,8 @@ Alt+C { spawn "~/.local/bin/miri" "action" "cycle-focused-workspace-mode"; }
     // For example, this is a standard bind to toggle the screen reader (orca).
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
     Mod+P allow-when-locked=true hotkey-overlay-title="Clipboard History" { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
-    Super+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Alt+Escape hotkey-overlay-title="session menu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
-    Alt+W hotkey-overlay-title="session menu" { spawn-sh "	qs -c noctalia-shell ipc call wallpaper toggle"; }
+    Super+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn-sh "noctalia msg session lock"; }
+    Alt+W hotkey-overlay-title="Wallpaper" { spawn-sh "noctalia msg panel-toggle wallpaper"; }
 
 
     // Example volume keys mappings for PipeWire & WirePlumber.
@@ -632,6 +636,14 @@ environment {
 
 
 
+// Floating Noctalia settings window.
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
+
 include "./noctalia.kdl"
 
 
@@ -674,4 +686,133 @@ window-rule {
 }
 
 
+window-rule {
+    match app-id="org.gnome.Nautilus"
+    //open-floating true
+    // default-column-width { }
+    //default-window-height { fixed 500; }
+    opacity 0.80
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 0.9
+    }
+}
 
+window-rule {
+    match app-id="vesktop"
+    default-column-width { proportion 0.7; }
+    opacity 0.85
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
+}
+
+window-rule {
+    match app-id="com.github.taiko2k.tauonmb"
+    default-column-width { proportion 0.7; }
+    opacity 0.85
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
+}
+
+window-rule {
+    match app-id="com.github.th_ch.youtube_music"
+    opacity 0.75
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
+}
+
+window-rule {
+    match app-id="org.keepassxc.KeePassXC"
+    opacity 0.85
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
+}
+
+window-rule {
+    match app-id="io.freetubeapp.FreeTube"
+    opacity 0.85
+    draw-border-with-background false
+    background-effect {
+        xray true
+        blur true
+        //noise 0.05
+        //saturation 3
+    }
+    popups {
+        opacity 1.0
+    }
+}
+
+
+
+layer-rule {
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
+/* Apps: blur them all without xray so it looks more realistic. */
+window-rule {
+  background-effect {
+    blur true
+    xray false
+  }
+}
+
+/*
+  Noctalia
+  Disable xray on all our surfaces so it looks more realistic.
+  Noctalia publishes blur regions automatically when ext-background-effects is available.
+*/
+layer-rule {
+  match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  background-effect {
+    xray false
+    // blur false
+  }
+}
+
+/* You can also fine-tune the blur effect globally. */
+blur {
+  passes 2        // more passes = stronger blur (default: 3)
+  offset 3.0      // sample distance per pass (default: 3.0)
+  noise 0.03      // grain overlay (default: 0.02)
+  saturation 1.0  // color saturation boost (default: 1.5)
+}
