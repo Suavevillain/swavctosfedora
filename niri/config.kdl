@@ -121,6 +121,7 @@ layout {
 include "./colors.kdl"
 
 
+
 prefer-no-csd
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
@@ -146,7 +147,8 @@ spawn-sh-at-startup "xdg-desktop-portal-gnome"
 //spawn-sh-at-startup "waypaper --restore"
 spawn-sh-at-startup "wl-paste --watch cliphist store"
 spawn-sh-at-startup "podman start searxng"
-
+spawn-sh-at-startup "podman start maloja"
+spawn-sh-at-startup "podman start glance"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
@@ -381,7 +383,8 @@ binds {
 Alt+S { spawn "~/.local/bin/miri" "action" "set-focused-workspace-mode" "scroll"; }
 Alt+M { spawn "~/.local/bin/miri" "action" "set-focused-workspace-mode" "master"; }
 Alt+C { spawn "~/.local/bin/miri" "action" "cycle-focused-workspace-mode"; }
-
+    Super+Shift+O { spawn-sh "~/Documents/scripts/obsidian-shortcuts.py"; }
+     
 
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
@@ -751,6 +754,7 @@ window-rule {
     }
 }
 
+
 window-rule {
     match app-id="org.keepassxc.KeePassXC"
     opacity 0.85
@@ -816,3 +820,5 @@ blur {
   noise 0.03      // grain overlay (default: 0.02)
   saturation 1.0  // color saturation boost (default: 1.5)
 }
+
+

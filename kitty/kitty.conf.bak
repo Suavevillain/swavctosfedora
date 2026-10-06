@@ -8,7 +8,7 @@
 # color scheme
 background_opacity      0.8
 
-background_blur         2
+background_blur         1
 
 # fonts
 font_family             Hack Nerd Font
@@ -39,5 +39,5 @@ tab_bar_margin_width 6
 
 # BEGIN_KITTY_THEME
 # Everforest Dark Hard
-#include current-theme.conf
+include current-theme.conf
 # END_KITTY_THEME
